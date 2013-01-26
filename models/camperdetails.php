@@ -176,7 +176,7 @@ class muusla_databaseModelcamperdetails extends JModel
 	function calculateCharges($camperid) {
 		$db =& JFactory::getDBO();
 		$user =& JFactory::getUser();
-		$query = "SELECT mc.camperid, mc.firstname, mc.lastname, mc.hohid, DATE_FORMAT(mc.birthdate, '%m/%d/%Y') birthdate, muusa_age_f(DATE_FORMAT(mc.birthdate, '%m/%d/%Y')) age, mc.gradeoffset, IFNULL(mv.roomid,0) roomid FROM muusa_campers mc LEFT JOIN muusa_campers_v mv ON mc.camperid=mv.camperid WHERE mc.camperid=$camperid";
+		$query = "SELECT mc.camperid, mc.firstname, mc.lastname, mc.hohid, DATE_FORMAT(mc.birthdate, '%m/%d/%Y') birthdate, muusa_age_f(mc.birthdate) age, mc.gradeoffset, IFNULL(mv.roomid,0) roomid FROM muusa_campers mc LEFT JOIN muusa_campers_v mv ON mc.camperid=mv.camperid WHERE mc.camperid=$camperid";
 		$db->setQuery($query);
 		$camper = $db->loadObject();
 		if($db->getErrorNum()) {
@@ -193,7 +193,7 @@ class muusla_databaseModelcamperdetails extends JModel
 
 			$obj = new stdClass;
 			$obj->camperid = $camper->camperid;
-			$obj->amount = "&&muusa_programs_fee_f('$camper->birthdate', $camper->gradeoffset)";
+			$obj->amount = "&&muusa_programs_fee_f(STR_TO_DATE('$camper->birthdate', '%m/%d/%Y'), $camper->gradeoffset)";
 			$obj->memo = $camper->firstname . " " . $camper->lastname;
 			$obj->chargetypeid = "&&(SELECT chargetypeid FROM muusa_chargetypes WHERE name LIKE 'Registration%')";
 				$obj->timestamp = date("Y-m-d");
@@ -216,7 +216,7 @@ class muusla_databaseModelcamperdetails extends JModel
 			foreach($children as $child) {
 				$obj = new stdClass;
 				$obj->camperid = $child->camperid;
-				$obj->amount = "&&muusa_programs_fee_f('$child->birthdate', $child->gradeoffset)";
+				$obj->amount = "&&muusa_programs_fee_f(STR_TO_DATE('$child->birthdate', '%m/%d/%Y'), $child->gradeoffset)";
 				$obj->memo = $child->firstname . " " . $child->lastname;
 				$obj->chargetypeid = "&&(SELECT chargetypeid FROM muusa_chargetypes WHERE name LIKE 'Registration%')";
 				$obj->timestamp = date("Y-m-d");
@@ -317,7 +317,7 @@ class muusla_databaseModelcamperdetails extends JModel
 
 	function updateHousing($roomid) {
 		$db =& JFactory::getDBO();
-		$query = "SELECT mc.camperid FROM muusa_campers mc, muusa_fiscalyear mf, muusa_currentyear my WHERE mc.camperid=mf.camperid AND muusa_age_f(DATE_FORMAT(birthdate, '%m/%d/%Y'))>4 AND mf.roomid=$roomid AND mf.fiscalyear=my.year";
+		$query = "SELECT mc.camperid FROM muusa_campers mc, muusa_fiscalyear mf, muusa_currentyear my WHERE mc.camperid=mf.camperid AND muusa_age_f(birthdate)>4 AND mf.roomid=$roomid AND mf.fiscalyear=my.year";
 		$db->setQuery($query);
 		$roommates = $db->loadResultArray();
 

@@ -72,7 +72,7 @@ class muusla_databaseModelcampers extends JModel
 	function getCamper($camperid) {
 		$db =& JFactory::getDBO();
 		$query = "SELECT mc.camperid, mc.hohid, mc.firstname, mc.lastname, mc.sexcd, mc.address1, mc.address2, mc.city, mc.statecd, mc.zipcd, mc.country, ";
-		$query .= "mc.email, DATE_FORMAT(mc.birthdate, '%m/%d/%Y') birthdate, muusa_age_f(DATE_FORMAT(mc.birthdate, '%m/%d/%Y')) age, mc.gradeoffset, ";
+		$query .= "mc.email, DATE_FORMAT(mc.birthdate, '%m/%d/%Y') birthdate, muusa_age_f(mc.birthdate) age, mc.gradeoffset, ";
 		$query .= "mc.roomprefid1, mc.roomprefid2, mc.roomprefid3, mc.matepref1, mc.matepref2, mc.matepref3, mc.sponsor, IF(mc.is_handicap, ' checked', '') is_handicap, IF(mc.is_ymca,' checked', '') is_ymca, IF(mc.is_ecomm,' checked', '') is_ecomm, ";
 		$query .= "mc.foodoptionid, mc.churchid, mc.programid, CONCAT(mb.name, ' ', mv.roomnbr) room ";
 		$query .= "FROM muusa_campers mc LEFT JOIN (muusa_campers_v mv, muusa_rooms mr, muusa_buildings mb) ON mc.camperid=mv.camperid AND mv.roomid=mr.roomid AND mr.buildingid=mb.buildingid WHERE mc.camperid=$camperid";
@@ -82,7 +82,7 @@ class muusla_databaseModelcampers extends JModel
 
 	function getChildren($hohid) {
 		$db =& JFactory::getDBO();
-		$query = "SELECT mc.camperid, mc.firstname, mc.lastname, mc.sexcd, mc.email, DATE_FORMAT(mc.birthdate, '%m/%d/%Y') birthdate, mc.gradeoffset, muusa_age_f(DATE_FORMAT(mc.birthdate, '%m/%d/%Y')) age, ";
+		$query = "SELECT mc.camperid, mc.firstname, mc.lastname, mc.sexcd, mc.email, DATE_FORMAT(mc.birthdate, '%m/%d/%Y') birthdate, mc.gradeoffset, muusa_age_f(mc.birthdate) age, ";
 		$query .= "IF(mc.is_handicap, ' checked', '') is_handicap, mc.foodoptionid FROM muusa_campers mc WHERE mc.hohid=$hohid ORDER BY birthdate DESC";
 		$db->setQuery($query);
 		return $db->loadObjectList();
@@ -108,8 +108,8 @@ class muusla_databaseModelcampers extends JModel
 
 	function upsertCamper($obj) {
 		$db =& JFactory::getDBO();
-		$obj->gradeoffset = "&&$obj->grade-muusa_age_f('$obj->birthdate')";
-		$obj->programid = "&&muusa_programs_id_f('$obj->birthdate', ($obj->grade-muusa_age_f('$obj->birthdate')))";
+		$obj->gradeoffset = "&&$obj->grade-muusa_age_f(STR_TO_DATE('$obj->birthdate', '%m/%d/%Y'))";
+		$obj->programid = "&&muusa_programs_id_f(STR_TO_DATE('$obj->birthdate', '%m/%d/%Y'), ($obj->grade-muusa_age_f(STR_TO_DATE('$obj->birthdate', '%m/%d/%Y'))))";
 		$obj->birthdate = "&&STR_TO_DATE('$obj->birthdate', '%m/%d/%Y')";
 		unset($obj->grade);
 		if($obj->camperid < 1000) {
