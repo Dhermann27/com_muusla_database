@@ -21,7 +21,7 @@ class muusla_databaseModelpositions extends JModel
 {
 	function getPositions() {
 		$db =& JFactory::getDBO();
-		$query = "SELECT mp.positionid, mp.name, FORMAT(mp.registration_amount,2) regamount, FORMAT(mp.housing_amount,2) houseamount, mp.is_shown FROM muusa_positions mp, muusa_currentyear my WHERE mp.start_year <= my.year AND mp.end_year > my.year";
+		$query = "SELECT mp.positionid, mp.name, FORMAT(mp.registration_amount,2) regamount, FORMAT(mp.housing_amount,2) houseamount, mp.is_shown FROM muusa_positions mp, muusa_currentyear my WHERE mp.start_year <= my.year AND mp.end_year > my.year ORDER BY mp.name";
 		$db->setQuery($query);
 		return $db->loadObjectList();
 	}

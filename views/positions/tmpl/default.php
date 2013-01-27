@@ -17,7 +17,7 @@ foreach($this->positions as $position) {
 	echo "               <h2 class='contentheading'>$position->name</h2>\n";
 	echo "            </div>\n";
 	echo "            <div class='article-content'>\n";
-	echo "               New Name: <input type='text' name='positionname-$position->positionid' size='20' value='$position->name' />\n";
+	echo "               Name: <input type='text' name='positionname-$position->positionid' size='20' value='$position->name' />\n";
 	echo "               Registration Amount: $<input type='text' name='positionregamount-$position->positionid' size='10' value='$position->regamount' />\n";
 	echo "               Housing Amount: $<input type='text' name='positionhouseamount-$position->positionid' size='10' value='$position->houseamount' />\n";
 	if($position->is_shown == "1") {

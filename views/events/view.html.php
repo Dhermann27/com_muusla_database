@@ -18,7 +18,7 @@ class muusla_databaseViewevents extends JView
 		$this->assignRef('rooms', $model->getRooms());
 		$this->assignRef('times', $model->getTimes());
 		$this->assignRef('events', $model->getEvents());
-
+		
 		parent::display($tpl);
 	}
 
