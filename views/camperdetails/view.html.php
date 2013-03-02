@@ -24,7 +24,7 @@ class muusla_databaseViewcamperdetails extends JView
 	function save($tpl = null) {
 		$model =& $this->getModel();
 		$user =& JFactory::getUser();
-		$calls[][] = array();
+/*		$calls[][] = array();
 		$events = array();
 		foreach(JRequest::get() as $key=>$value) {
 			if(preg_match('/^(\w+)-(\w+)-(\d+)$/', $key, $objects)) {
@@ -117,7 +117,7 @@ class muusla_databaseViewcamperdetails extends JView
 				array_push($credits[$credit->fiscalyear], $credit);
 			}
 		}
-		$this->assignRef('credits', $credits);
+		$this->assignRef('credits', $credits);*/
 
 		parent::display($tpl);
 	}

@@ -11,7 +11,7 @@ jimport( 'joomla.application.component.view');
  *
  * @package		muusla_database
  */
-class muusla_databaseViewevents extends JView
+class Muusla_databaseViewEvents extends JView
 {
 	function display($tpl = null) {
 		$model =& $this->getModel();

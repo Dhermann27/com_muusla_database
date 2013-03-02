@@ -20,18 +20,18 @@ jimport( 'joomla.application.component.model' );
 class muusla_databaseModelcamperdetails extends JModel
 {
 
+	function getAllCampers() {
+		$db =& JFactory::getDBO();
+		$query = "SELECT mf.familyid, mc.firstname, mc.lastname, mf.city, mf.statecd FROM muusa_campers mc, muusa_family mf WHERE mc.familyid=mf.familyid ORDER BY mf.familyname, mc.birthdate";
+		$db->setQuery($query);
+		return $db->loadObjectList();
+	}
+
 	function getYear() {
 		$db =& JFactory::getDBO();
 		$query = "SELECT year FROM muusa_currentyear";
 		$db->setQuery($query);
 		return $db->loadResult();
-	}
-
-	function getAllCampers() {
-		$db =& JFactory::getDBO();
-		$query = "SELECT camperid, hohid, firstname, lastname, city, statecd FROM muusa_campers ORDER BY lastname, firstname, statecd, city";
-		$db->setQuery($query);
-		return $db->loadObjectList();
 	}
 
 	function getCamper($camperid) {

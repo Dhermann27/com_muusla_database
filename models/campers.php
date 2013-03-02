@@ -20,13 +20,6 @@ jimport( 'joomla.application.component.model' );
 class muusla_databaseModelcampers extends JModel
 {
 
-	function getAllCampers() {
-		$db =& JFactory::getDBO();
-		$query = "SELECT camperid, hohid, firstname, lastname, city, statecd FROM muusa_campers ORDER BY lastname, firstname, statecd, city";
-		$db->setQuery($query);
-		return $db->loadObjectList();
-	}
-
 	function getHeads() {
 		$db =& JFactory::getDBO();
 		$query = "SELECT camperid, firstname, lastname, city, statecd FROM muusa_campers WHERE hohid=0 ORDER BY lastname, firstname, statecd, city";

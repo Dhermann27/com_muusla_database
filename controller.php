@@ -42,30 +42,5 @@ class muusla_databaseController extends JController
       }
    }
 
-   function save()
-   {
-      $this->muuslaControl('default', 'save');
-   }
-
-   function detail()
-   {
-      $this->muuslaControl('workshop', 'detail');
-   }
-
-   function payment()
-   {
-      $this->muuslaControl('payment', 'payment');
-   }
-
-   function editcamper()
-   {
-      $this->muuslaControl('editcamper', 'editcamper');
-   }
-
-   function newcamper()
-   {
-      $this->muuslaControl('newcamper', 'newcamper');
-   }
-
 }
 ?>

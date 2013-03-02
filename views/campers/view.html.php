@@ -16,13 +16,12 @@ class muusla_databaseViewcampers extends JView
 	function display($tpl = null) {
 		$model =& $this->getModel();
 		$this->assignRef('campers', $model->getAllCampers());
-
 		parent::display($tpl);
 	}
 
 	function editcamper($tpl = null) {
 		$model =& $this->getModel();
-		if(JRequest::getSafe("camperdelete") == "delete") {
+/*		if(JRequest::getSafe("camperdelete") == "delete") {
 			$val = "Camper deleted successfully.";
 			$this->assignRef('deleted', $val);
 			$model->deletecamper(JRequest::getSafe("editcamper"));
@@ -63,82 +62,7 @@ class muusla_databaseViewcampers extends JView
 			$this->assignRef('churches', $model->getChurches());
 			$this->assignRef('phonetypes', $model->getPhonetypes());
 		}
-
-		parent::display($tpl);
-	}
-
-	function save($tpl = null) {
-		$model =& $this->getModel();
-		$user =& JFactory::getUser();
-		$calls[][] = array();
-		$phonenumbers[] = array();
-		foreach(JRequest::get() as $key=>$value) {
-			if(preg_match('/^(\w+)-(\w+)-(\d+)$/', $key, $objects)) {
-				if(!is_array($value)) {
-					if($calls[$objects[1]][$objects[3]] == null) {
-						$obj = new stdClass;
-						if($objects[1] == "campers") {
-							$obj->is_ecomm = 0;
-							$obj->is_handicap = 0;
-							$obj->is_ymca = 0;
-							$obj->is_ecomm = 0;
-						}
-						if($objects[3] < 1000) {
-							$obj->created_by = $user->username;
-							$obj->created_at = date("Y-m-d H:i:s");
-						} else {
-							$obj->modified_by = $user->username;
-							$obj->modified_at = date("Y-m-d H:i:s");
-						}
-						$calls[$objects[1]][$objects[3]] = $obj;
-					}
-					$calls[$objects[1]][$objects[3]]->$objects[2] = $this->getSafe($value);
-				} else {
-					$obj = new stdClass;
-					$obj->created_by = $user->username;
-					$obj->created_at = date("Y-m-d H:i:s");
-					$calls[$objects[1]][$objects[3]] = $value;
-				}
-			}
-		}
-		if($calls["campers"][0]) {
-			$hohid = $model->upsertCamper($calls["campers"][0]);
-			foreach($calls[phonenumbers] as $id => $number) {
-				if($number->camperid == 0 && $number->phonenbr != "") {
-					$number->camperid = $hohid;
-					$number->phonenbrid = $phonenbrid;
-					$model->upsertPhonenumber($number);
-				}
-			}
-			unset($calls["campers"][0]);
-		} else {
-			$hohid = JRequest::getSafe("hohid");
-		}
-		foreach($calls["campers"] as $id => $camper) {
-			if($camper->firstname != "") {
-				if($id < 1000) {
-					$camper->hohid = $hohid;
-				} else {
-					$camper->camperid = $id;
-				}
-				$camperid = $model->upsertCamper($camper);
-				if($calls[phonenumbers]) {
-					foreach($calls[phonenumbers] as $phonenbrid => $number) {
-						if($number->camperid == $id && $number->phonenbr != "") {
-							if($number->delete == "delete") {
-								$model->deletePhonenumber($phonenbrid);
-							} else {
-								$number->phonenbrid = $phonenbrid;
-								$number->camperid = $camperid;
-								$model->upsertPhonenumber($number);
-							}
-						}
-					}
-				}
-			}
-		}
-
-		$this->assignRef('campers', $model->getAllCampers());
+*/
 		parent::display($tpl);
 	}
 
