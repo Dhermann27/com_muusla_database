@@ -27,6 +27,7 @@
    	   	   		   $("#muusaApp").attr("action", "<?php echo JURI::root(true);?>/index.php/register").submit();
    	   	   		   break;
    	   		   case 1:
+   	   	   		   $("#campers").val("(1)");
    	   	   		   $("#muusaApp").attr("action", "<?php echo JURI::root(true);?>/index.php/register").submit();
    	   	   		   break;
    	   	   }
@@ -43,6 +44,7 @@
          <h4>Action:</h4>
          <select id="actioncamper" class="ui-corner-all">
             <option value="0">Camper Details</option>
+            <option value="1">Create New Camper</option>
          </select> <a id="go">Go</a>
       </div>
    </form>
