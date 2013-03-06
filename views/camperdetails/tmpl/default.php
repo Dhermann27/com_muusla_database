@@ -15,19 +15,19 @@
 	           	   <?php
 	           	   $campers = array();
 	           	   foreach ($this->campers as $camper) {
-	           	      array_push($campers, "{ label: '$camper->firstname $camper->lastname ($camper->city, $camper->statecd)', value: '$camper->firstname $camper->lastname ($camper->familyid)'}\n");
+	           	      array_push($campers, "{ label: '$camper->firstname $camper->lastname ($camper->city, $camper->statecd)', ident: '$camper->familyid'}\n");
 	           	   } 
 	           	   echo implode(",\n", $campers);
 	           	   ?>
 	           	   ];
-   	   $("#campers").autocomplete( { source: campers }).focus(function() { $(this).val("") });
+   	   $("#campers").autocomplete( { source: campers, select: function(event, ui) { $("#campers").val(ui.item.label); $("#camper-value").val(ui.item.ident); return false; } });
    	   $("#go").button().click(function() {
    	   	   switch(parseInt($("#actioncamper").val(), 10)) {
    	   		   case 0:
    	   	   		   $("#muusaApp").attr("action", "<?php echo JURI::root(true);?>/index.php/register").submit();
    	   	   		   break;
    	   		   case 1:
-   	   	   		   $("#campers").val("(1)");
+   	   	   		   $("#camper-value").val("1");
    	   	   		   $("#muusaApp").attr("action", "<?php echo JURI::root(true);?>/index.php/register").submit();
    	   	   		   break;
    	   	   }
@@ -39,8 +39,8 @@
    <form id="muusaApp" method="post">
       <div class="ui-widget" style="font-size: 1.5em;">
          <h4>Camper Name:</h4>
-         <input id="campers" name="editcamper"
-            class="inputtext ui-corner-all" />
+         <input type="text" id="campers" class="inputtext ui-corner-all" />
+         <input type="hidden" id="camper-value" name="editcamper" />
          <h4>Action:</h4>
          <select id="actioncamper" class="ui-corner-all">
             <option value="0">Camper Details</option>
