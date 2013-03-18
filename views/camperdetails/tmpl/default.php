@@ -30,6 +30,9 @@
    	   	   		   $("#camper-value").val("1");
    	   	   		   $("#muusaApp").attr("action", "<?php echo JURI::root(true);?>/index.php/register").submit();
    	   	   		   break;
+   	   		   case 2:
+   	   	   		   $("#muusaApp").attr("action", "<?php echo JURI::root(true);?>/index.php/register-online/workshop-selection").submit();
+   	   	   		   break;
    	   	   }
    	   });
    });
@@ -45,6 +48,7 @@
          <select id="actioncamper" class="ui-corner-all">
             <option value="0">Camper Details</option>
             <option value="1">Create New Camper</option>
+            <option value="2">Workshop Selection</option>
          </select> <a id="go">Go</a>
       </div>
    </form>
