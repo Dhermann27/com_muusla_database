@@ -31,7 +31,7 @@
    	   	   		   $("#muusaApp").attr("action", "<?php echo JURI::root(true);?>/index.php/register").submit();
    	   	   		   break;
    	   		   case 2:
-   	   	   		   $("#muusaApp").attr("action", "<?php echo JURI::root(true);?>/index.php/register-online/workshop-selection").submit();
+   	   	   		   $("#muusaApp").attr("action", "<?php echo JURI::root(true);?>/index.php/register-alias/workshops").submit();
    	   	   		   break;
    	   	   }
    	   });
