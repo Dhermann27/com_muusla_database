@@ -31,7 +31,10 @@
    	   	   		   $("#muusaApp").attr("action", "<?php echo JURI::root(true);?>/index.php/register").submit();
    	   	   		   break;
    	   		   case 2:
-   	   	   		   $("#muusaApp").attr("action", "<?php echo JURI::root(true);?>/index.php/register-alias/workshops").submit();
+   	   	   		   $("#muusaApp").attr("action", "<?php echo JURI::root(true);?>/index.php/registration/workshops").submit();
+   	   	   		   break;
+   	   		   case 3:
+   	   	   		   $("#muusaApp").attr("action", "<?php echo JURI::root(true);?>/index.php/rooms").submit();
    	   	   		   break;
    	   	   }
    	   });
@@ -46,7 +49,8 @@
          <input type="hidden" id="camper-value" name="editcamper" />
          <h4>Action:</h4>
          <select id="actioncamper" class="ui-corner-all">
-            <option value="0">Camper Details</option>
+            <option value="3">Assign Room</option>
+            <option value="0" selected="selected">Camper Details</option>
             <option value="1">Create New Camper</option>
             <option value="2">Workshop Selection</option>
          </select> <a id="go">Go</a>
