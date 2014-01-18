@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+        <layout title="Staff Positions">
+                <message>
+                        <![CDATA[COM_MUUSA_DATABASE_STAFF_VIEW_DEFAULT_DESC]]>
+                </message>
+        </layout>
+</metadata>

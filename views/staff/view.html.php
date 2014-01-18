@@ -11,12 +11,12 @@ jimport( 'joomla.application.component.view');
  *
  * @package		muusla_tools
  */
-class muusla_databaseViewprereg extends JView
+class muusla_databaseViewstaff extends JView
 {
    function display($tpl = null) {
       $model =& $this->getModel();
       $user =& JFactory::getUser();
-      $admin = in_array("8", $user->groups) || in_array("10", $user->groups);
+      $admin = in_array("8", $user->groups) || in_array("9", $user->groups) || in_array("10", $user->groups);
       $calls[][] = array();
       foreach(JRequest::get() as $key=>$value) {
          if(preg_match('/^(\w+)-(\w+)-(\d+)$/', $key, $objects)) {
@@ -31,23 +31,32 @@ class muusla_databaseViewprereg extends JView
             $calls[$table][$id]->$column = $this->getSafe($value);
          }
       }
-      if($admin && count($calls["charge"]) > 0) {
-         foreach($calls["charge"] as $id => $charge) {
-            if($charge->delete == "on") {
-               $model->deleteCharge($id);
+      if($admin && count($calls["camperid__staff"]) > 0) {
+         foreach($calls["camperid__staff"] as $id => $staff) {
+            if($staff->delete == "on") {
+               $model->deleteCamperStaff($staff);
             }
-            else if($charge->amount != 0) {
-               $model->upsertCharge($charge);
+            else if($id < 1000 && $staff->camperid > 0 && $staff->staffpositionid > 0) {
+               $model->upsertStaff($staff);
             }
          }
       }
-      
+      if($admin && count($calls["yearattending__staff"]) > 0) {
+         foreach($calls["yearattending__staff"] as $id => $staff) {
+            if($staff->delete == "on") {
+               $model->deleteYearStaff($staff);
+            }
+         }
+      }
+
       $this->assignRef('admin', $admin);
       $this->assignRef('campers', $model->getCampers());
-      $this->assignRef('chargetypes', $model->getChargetypes());
-      $this->assignRef('years', $model->getYears());
-      $this->assignRef('carrys', $model->getCarryovers());
-      $this->assignRef('preregs', $model->getPrereg());
+      $programs = $model->getPrograms();
+      foreach($programs as $program) {
+         $program->positions = $model->getPositions($program->id);
+         $program->staff = $model->getStaff($program->id);
+      }
+      $this->assignRef('programs', $programs);
       parent::display($tpl);
    }
 
