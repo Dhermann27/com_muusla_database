@@ -78,7 +78,7 @@
                                  name="<?php echo $staff->yearattendingid!=0 ? "yearattending__staff-staffpositionid-$staff->yearattendingid" : "camperid__staff-staffpositionid-$staff->camperid"?>"
                                  value="<?php echo $staff->staffpositionid;?>" />
                               </td>
-                              <td><?php echo $staff->yearattendingid!=0 ? "Yes" : "No";?>
+                              <td align="center"><?php echo $staff->yearattendingid!=0 ? "Yes" : "No";?>
                               </td>
                               <td nowrap="nowrap"><input type="checkbox"
                                  name="<?php echo $staff->yearattendingid!=0 ? "yearattending__staff-delete-$staff->yearattendingid" : "camperid__staff-delete-$staff->camperid"?>" />
