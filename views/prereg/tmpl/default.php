@@ -83,7 +83,7 @@
                               echo "                  </tr>\n";
                            }?>
                            <tr>
-                              <td colspan="5"><hr /></td>
+                              <td colspan="6"><hr /></td>
                            </tr>
                         </tbody>
                         <tbody>
@@ -111,7 +111,7 @@
                            </tr>
                            <?php }
                            if($this->admin) {?>
-                           <tr>
+                           <tr class="prereg">
                               <td><select name="charge-chargetypeid-"
                                  class="ui-corner-all">
                                     <option value="0">Charge Type</option>
@@ -144,11 +144,14 @@
                               </td>
                            </tr>
                            <?php }?>
+                           <tr>
+                              <td colspan="6"><hr /></td>
+                           </tr>
                         </tbody>
                         <?php if($this->admin) {?>
                         <tfoot>
                            <tr>
-                              <td align="right" colspan="5">
+                              <td align="right" colspan="6">
                                  <button id="save">Save Preregistrations</button>
                               </td>
                            </tr>

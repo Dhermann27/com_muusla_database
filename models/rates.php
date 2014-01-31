@@ -28,14 +28,14 @@ class muusla_databaseModelrates extends JModel
 	 
 	function getPrograms() {
 		$db =& JFactory::getDBO();
-		$query = "SELECT programid, name FROM muusa_programs";
+		$query = "SELECT p.id, p.name FROM muusa_program p, muusa_year y WHERE y.year>=p.start_year AND y.year<=p.end_year";
 		$db->setQuery($query);
 		return $db->loadObjectList();
 	}
 
 	function getRates() {
 		$db =& JFactory::getDBO();
-		$query = "SELECT mr.rateid, mr.buildingid buildingid, mb.name buildingname, mr.programid programid, mp.name programname, mr.occupancy_adult occadult, mr.occupancy_children occchild, mr.amount FROM muusa_rates mr, muusa_buildings mb, muusa_programs mp WHERE mr.buildingid=mb.buildingid AND mr.programid=mp.programid ORDER BY mr.buildingid, mr.programid, mr.occupancy_adult, mr.occupancy_children";
+		$query = "SELECT mr.rateid, mr.buildingid buildingid, mb.name buildingname, mr.programid, mp.name programname, mr.occupancy_adult occadult, mr.occupancy_children occchild, mr.amount FROM muusa_rates mr, muusa_buildings mb WHERE mr.buildingid=mb.buildingid AND mr.programid=mp.programid ORDER BY mr.buildingid, mr.programid, mr.occupancy_adult, mr.occupancy_children";
 		$db->setQuery($query);
 		$results = $db->loadObjectList();
 		$buildings = array();

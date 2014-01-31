@@ -86,7 +86,7 @@
                            </tr>
                            <?php }
                            }?>
-                           <tr>
+                           <tr class="staff">
                               <td><input type="text"
                                  class="inputtext camperlist ui-corner-all" /><input
                                  type="hidden"
@@ -107,9 +107,11 @@
                                  <button class="add help">Add Staff</button>
                               </td>
                            </tr>
+                           <tr>
+                              <td colspan="4"><hr /></td>
+                           </tr>
                         </tbody>
-                        <?php
-                        }?>
+                        <?php } ?>
                         <tfoot>
                            <tr>
                               <td align="right" colspan="4">

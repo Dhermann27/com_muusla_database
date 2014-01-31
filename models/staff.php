@@ -28,7 +28,7 @@ class muusla_databaseModelstaff extends JModel
 
    function getPrograms() {
       $db =& JFactory::getDBO();
-      $query = "SELECT id, name FROM muusa_program ORDER BY name";
+      $query = "SELECT id, name FROM muusa_program p, muusa_year y WHERE y.year>=p.start_year AND y.year<=p.end_year AND y.is_current=1 ORDER BY name";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
@@ -42,7 +42,7 @@ class muusla_databaseModelstaff extends JModel
 
    function getStaff($id) {
       $db =& JFactory::getDBO();
-      $query = "SELECT * FROM (SELECT c.id camperid, 0 yearattendingid, f.name familyname, c.firstname, c.lastname, cs.staffpositionid, sp.name staffpositionname FROM muusa_family f, muusa_camper c, muusa_camperid__staff cs, muusa_staffposition sp WHERE f.id=c.familyid AND c.id=cs.camperid AND cs.staffpositionid=sp.id AND sp.programid=$id UNION ALL SELECT tsp.camperid, tsp.yearattendingid, f.name familyname, tsp.firstname, tsp.lastname, tsp.staffpositionid, tsp.staffpositionname FROM muusa_family f, muusa_thisyear_staff tsp WHERE f.id=tsp.familyid AND tsp.programid=$id) s1 ORDER BY familyname, lastname, firstname";
+      $query = "SELECT * FROM (SELECT c.id camperid, 0 yearattendingid, f.name familyname, c.firstname, c.lastname, cs.staffpositionid, sp.name staffpositionname FROM muusa_family f, muusa_camper c, muusa_camperid__staff cs, muusa_staffposition sp WHERE f.id=c.familyid AND c.id=cs.camperid AND cs.staffpositionid=sp.id AND sp.programid=$id UNION ALL SELECT c.id, ya.id, f.name, c.firstname, c.lastname, sp.id, sp.name FROM muusa_family f, muusa_camper c, muusa_yearattending ya, muusa_yearattending__staff tsp, muusa_staffposition sp, muusa_year y WHERE f.id=c.familyid AND c.id=ya.camperid AND ya.year=y.year AND y.is_current=1 AND ya.id=tsp.yearattendingid AND tsp.staffpositionid=sp.id AND sp.programid=$id) s1 ORDER BY familyname, lastname, firstname";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
