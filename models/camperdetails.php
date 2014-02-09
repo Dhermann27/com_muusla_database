@@ -21,7 +21,7 @@ class muusla_databaseModelcamperdetails extends JModel
 {
    function getAllCampers() {
       $db =& JFactory::getDBO();
-      $query = "SELECT mf.familyid, mc.firstname, mc.lastname, mf.city, mf.statecd FROM muusa_campers mc, muusa_family mf WHERE mc.familyid=mf.familyid ORDER BY mf.familyname, mc.birthdate";
+      $query = "SELECT f.id, c.firstname, c.lastname, f.city, f.statecd FROM muusa_camper c, muusa_family f WHERE c.familyid=f.id ORDER BY f.name, c.birthdate";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
