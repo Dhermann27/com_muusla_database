@@ -43,11 +43,11 @@ jQuery(document).ready(function ($) {
             class="camperlist-value" />
          <h4>Action:</h4>
          <select id="actioncamper" class="ui-corner-all">
-            <!-- <option value="3">Assign Room</option> -->
+            <option value="3">Assign Room</option>
             <option value="0" selected="selected">Camper Details</option>
             <option value="1">Create New Camper</option>
-            <!-- <option value="4">Print Nametag</option>
-            <option value="2">Workshop Selection</option>-->
+            <!-- <option value="4">Print Nametag</option> -->
+            <option value="2">Workshop Selection</option>
          </select> <a id="go">Go</a>
       </div>
    </form>
