@@ -53,6 +53,7 @@
                               <th>Name</th>
                               <th>Position</th>
                               <th>Registered?</th>
+                              <th>Pay Early Arrival Fees?</th>
                               <th>&nbsp;</th>
                            </tr>
                         </thead>
@@ -60,25 +61,32 @@
                         foreach($this->programs as $program) {?>
                         <tbody>
                            <tr>
-                              <td colspan="4"><h4>
+                              <td colspan="5"><h4>
                                     <?php echo $program->name;?>
                                  </h4></td>
                            </tr>
                            <?php 
                            if(count($program->staff) > 0) {
                               foreach($program->staff as $staff) {?>
-                           <tr>
-                              <td><?php echo "$staff->lastname, $staff->firstname ($staff->familyname)" ?>
+                           <tr align="center">
+                              <td align="left"><?php echo "$staff->lastname, $staff->firstname ($staff->familyname)" ?>
                                  <input type="hidden"
                                  name="<?php echo $staff->yearattendingid!=0 ? "yearattending__staff-yearattendingid-$staff->yearattendingid" : "camperid__staff-camperid-$staff->camperid"?>"
                                  value="<?php echo $staff->yearattendingid!=0 ? $staff->yearattendingid : $staff->camperid?>" />
                               </td>
-                              <td><?php echo $staff->staffpositionname;?>
+                              <td align="left"><?php echo $staff->staffpositionname;?>
                                  <input type="hidden"
                                  name="<?php echo $staff->yearattendingid!=0 ? "yearattending__staff-staffpositionid-$staff->yearattendingid" : "camperid__staff-staffpositionid-$staff->camperid"?>"
                                  value="<?php echo $staff->staffpositionid;?>" />
                               </td>
-                              <td align="center"><?php echo $staff->yearattendingid!=0 ? "Yes" : "No";?>
+                              <td><?php echo $staff->yearattendingid!=0 ? "Yes" : "No";?>
+                              </td>
+                              <td nowrap="nowrap"><?php if($staff->yearattendingid!=0) {?>
+                                 <input type="checkbox"
+                                 name="yearattending__staff-is_eaf_paid-<?php echo $staff->yearattendingid;?>"
+                                 <?php echo $staff->is_eaf_paid=="1" ? " checked" : "";?> />
+                                 Paid <?php } else { echo "&nbsp;"; 
+                                 }?>
                               </td>
                               <td nowrap="nowrap"><input type="checkbox"
                                  name="<?php echo $staff->yearattendingid!=0 ? "yearattending__staff-delete-$staff->yearattendingid" : "camperid__staff-delete-$staff->camperid"?>" />
@@ -108,13 +116,13 @@
                               </td>
                            </tr>
                            <tr>
-                              <td colspan="4"><hr /></td>
+                              <td colspan="5"><hr /></td>
                            </tr>
                         </tbody>
                         <?php } ?>
                         <tfoot>
                            <tr>
-                              <td align="right" colspan="4">
+                              <td align="right" colspan="5">
                                  <button class="save">Save Staff</button>
                               </td>
                            </tr>

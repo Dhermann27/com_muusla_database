@@ -45,6 +45,8 @@ class muusla_databaseViewstaff extends JView
          foreach($calls["yearattending__staff"] as $id => $staff) {
             if($staff->delete == "on") {
                $model->deleteYearStaff($staff);
+            } else {
+               $model->upsertPaid($staff);
             }
          }
       }
