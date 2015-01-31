@@ -11,18 +11,18 @@ jimport( 'joomla.application.component.view');
  *
  * @package		muusla_database
  */
-class muusla_databaseViewsimpledatabase extends JView
+class muusla_databaseViewsimpledatabase extends JViewLegacy
 {
-   
+    
    function display($tpl = null) {
-      $model =& $this->getModel();
+      $model = $this->getModel();
       $muusla = new stdClass;
-      
+
       $params = &JComponentHelper::getParams( 'com_muusla_database' );
       $muusla->name = $params->get( 'muusla' );
-      
+
       $muusla->items = $model->getItems($params->get( 'muusla' ));
-      
+
       $obj = new stdClass;
       $obj->id = 0;
       $obj->name = "";
@@ -33,8 +33,8 @@ class muusla_databaseViewsimpledatabase extends JView
    }
 
    function save($tpl = null) {
-      $model =& $this->getModel();
-      
+      $model = $this->getModel();
+
       foreach(JRequest::get() as $key=>$value) {
          if(preg_match('/^name-(\d*)/', $key, $matches)) {
             if($matches[1] == "0") {
@@ -53,7 +53,7 @@ class muusla_databaseViewsimpledatabase extends JView
 
       $muusla->name = JRequest::getSafe("table");
       $muusla->items = $model->getItems(JRequest::getSafe("table"));
-      
+
       $obj = new stdClass;
       $obj->id = 0;
       $obj->name = "";

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-        <layout title="Events">
-                <message>
+	<layout title="Events">
+		<message>
                         <![CDATA[COM_MUUSA_DATABASE_EVENTS_VIEW_DEFAULT_DESC]]>
-                </message>
-        </layout>
+		</message>
+	</layout>
 </metadata>

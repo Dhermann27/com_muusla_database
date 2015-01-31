@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-        <layout title="Rooms">
-                <message>
+	<layout title="Rooms">
+		<message>
                         <![CDATA[COM_MUUSA_DATABASE_ROOMS_VIEW_DEFAULT_DESC]]>
-                </message>
-        </layout>
+		</message>
+	</layout>
 </metadata>

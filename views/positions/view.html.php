@@ -11,17 +11,17 @@ jimport( 'joomla.application.component.view');
  *
  * @package		muusla_database
  */
-class muusla_databaseViewpositions extends JView
+class muusla_databaseViewpositions extends JViewLegacy
 {
    function display($tpl = null) {
-      $model =& $this->getModel();
+      $model = $this->getModel();
       $this->assignRef('positions', $model->getPositions());
 
       parent::display($tpl);
    }
 
    function save($tpl = null) {
-      $model =& $this->getModel();
+      $model = $this->getModel();
       foreach(JRequest::get() as $key=>$value) {
          if(preg_match('/^positionname-(\d*)/', $key, $matches)) {
             if($matches[1] == "0") {

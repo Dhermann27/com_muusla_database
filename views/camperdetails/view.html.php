@@ -11,14 +11,14 @@ jimport( 'joomla.application.component.view');
  *
  * @package		muusla_database
  */
-class muusla_databaseViewcamperdetails extends JView
+class muusla_databaseViewcamperdetails extends JViewLegacy
 {
 
-	function display($tpl = null) {
-		$model =& $this->getModel();
-		$this->assignRef('campers', $model->getAllCampers());
+   function display($tpl = null) {
+      $model = $this->getModel();
+      $this->assignRef('campers', $model->getAllCampers());
 
-		parent::display($tpl);
-	}
+      parent::display($tpl);
+   }
 
 }

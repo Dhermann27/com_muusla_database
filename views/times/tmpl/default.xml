@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-        <layout title="Times">
-                <message>
+	<layout title="Times">
+		<message>
                         <![CDATA[COM_MUUSA_DATABASE_TIMES_VIEW_DEFAULT_DESC]]>
-                </message>
-        </layout>
+		</message>
+	</layout>
 </metadata>

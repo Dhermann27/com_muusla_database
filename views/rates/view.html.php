@@ -11,10 +11,10 @@ jimport( 'joomla.application.component.view');
  *
  * @package		muusla_database
  */
-class muusla_databaseViewrates extends JView
+class muusla_databaseViewrates extends JViewLegacy
 {
    function display($tpl = null) {
-      $model =& $this->getModel();
+      $model = $this->getModel();
       $this->assignRef('buildings', $model->getBuildings());
       $this->assignRef('programs', $model->getPrograms());
       $this->assignRef('rategroups', $model->getRates());
@@ -23,7 +23,7 @@ class muusla_databaseViewrates extends JView
    }
 
    function save($tpl = null) {
-      $model =& $this->getModel();
+      $model = $this->getModel();
       foreach(JRequest::get() as $key=>$value) {
          if(preg_match('/^rateamount-(\d*)/', $key, $matches) && $value > 0.0) {
             if($matches[1] == "0") {

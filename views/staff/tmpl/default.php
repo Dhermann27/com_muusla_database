@@ -53,7 +53,7 @@
                               <th>Name</th>
                               <th>Position</th>
                               <th>Registered?</th>
-                              <th>Pay Early Arrival Fees?</th>
+                              <th>Must Pay<br /> Early Arrival Fees?</th>
                               <th>&nbsp;</th>
                            </tr>
                         </thead>
@@ -85,7 +85,7 @@
                                  <input type="checkbox"
                                  name="yearattending__staff-is_eaf_paid-<?php echo $staff->yearattendingid;?>"
                                  <?php echo $staff->is_eaf_paid=="1" ? " checked" : "";?> />
-                                 Paid <?php } else { echo "&nbsp;"; 
+                                 Must Pay <?php } else { echo "&nbsp;"; 
                                  }?>
                               </td>
                               <td nowrap="nowrap"><input type="checkbox"
@@ -112,7 +112,7 @@
                               </td>
                               <td>&nbsp;</td>
                               <td>
-                                 <button class="add help">Add Staff</button>
+                                 <button class="add myhelp">Add Staff</button>
                               </td>
                            </tr>
                            <tr>

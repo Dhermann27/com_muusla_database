@@ -17,10 +17,10 @@ jimport( 'joomla.application.component.model' );
  * @package    muusla_database
  * @subpackage Components
  */
-class muusla_databaseModelcamperdetails extends JModel
+class muusla_databaseModelcamperdetails extends JModelItem
 {
    function getAllCampers() {
-      $db =& JFactory::getDBO();
+      $db = JFactory::getDBO();
       $query = "SELECT f.id, c.firstname, c.lastname, f.city, f.statecd FROM muusa_camper c, muusa_family f WHERE c.familyid=f.id ORDER BY f.name, c.birthdate";
       $db->setQuery($query);
       return $db->loadObjectList();

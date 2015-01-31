@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-        <layout title="Simple Database">
-                <message>
+	<layout title="Simple Database">
+		<message>
                         <![CDATA[COM_MUUSA_DATABASE_SIMPLEDATABASE_VIEW_DEFAULT_DESC]]>
-                </message>
-        </layout>
+		</message>
+	</layout>
 </metadata>

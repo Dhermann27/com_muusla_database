@@ -11,11 +11,11 @@ jimport( 'joomla.application.component.view');
  *
  * @package		muusla_tools
  */
-class muusla_databaseViewprereg extends JView
+class muusla_databaseViewprereg extends JViewLegacy
 {
    function display($tpl = null) {
-      $model =& $this->getModel();
-      $user =& JFactory::getUser();
+      $model = $this->getModel();
+      $user = JFactory::getUser();
       $admin = in_array("8", $user->groups) || in_array("10", $user->groups);
       $calls[][] = array();
       foreach(JRequest::get() as $key=>$value) {
@@ -41,7 +41,7 @@ class muusla_databaseViewprereg extends JView
             }
          }
       }
-      
+
       $this->assignRef('admin', $admin);
       $this->assignRef('campers', $model->getCampers());
       $this->assignRef('chargetypes', $model->getChargetypes());

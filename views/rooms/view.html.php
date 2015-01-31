@@ -11,10 +11,10 @@ jimport( 'joomla.application.component.view');
  *
  * @package		muusla_database
  */
-class muusla_databaseViewrooms extends JView
+class muusla_databaseViewrooms extends JViewLegacy
 {
    function display($tpl = null) {
-      $model =& $this->getModel();
+      $model = $this->getModel();
       $this->assignRef('buildings', $model->getBuildings());
       $this->assignRef('rooms', $model->getRooms());
 
@@ -22,7 +22,7 @@ class muusla_databaseViewrooms extends JView
    }
 
    function save($tpl = null) {
-      $model =& $this->getModel();
+      $model = $this->getModel();
       foreach(JRequest::get() as $key=>$value) {
          if(preg_match('/^roomnbr-(\d*)/', $key, $matches)) {
             if($matches[1] == "0") {

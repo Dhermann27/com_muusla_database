@@ -140,7 +140,7 @@
                                  class="inputtext ui-corner-all" />
                               </td>
                               <td>
-                                 <button class="add help">Add</button>
+                                 <button class="add myhelp">Add</button>
                               </td>
                            </tr>
                            <?php }?>

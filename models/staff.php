@@ -17,39 +17,39 @@ jimport( 'joomla.application.component.model' );
  * @package    muusla_database
  * @subpackage Components
  */
-class muusla_databaseModelstaff extends JModel
+class muusla_databaseModelstaff extends JModelItem
 {
    function getCampers() {
-      $db =& JFactory::getDBO();
+      $db = JFactory::getDBO();
       $query = "SELECT c.id, c.firstname, c.lastname, f.city, f.statecd FROM muusa_camper c, muusa_family f WHERE c.familyid=f.id ORDER BY f.name, c.birthdate";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
 
    function getPrograms() {
-      $db =& JFactory::getDBO();
+      $db = JFactory::getDBO();
       $query = "SELECT id, name FROM muusa_program p, muusa_year y WHERE y.year>=p.start_year AND y.year<=p.end_year AND y.is_current=1 ORDER BY name";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
 
    function getPositions($id) {
-      $db =& JFactory::getDBO();
+      $db = JFactory::getDBO();
       $query = "SELECT sp.id, sp.name FROM muusa_staffposition sp, muusa_year y WHERE sp.start_year<=y.year AND sp.end_year>y.year AND y.is_current=1 AND sp.programid=$id ORDER BY name";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
 
    function getStaff($id) {
-      $db =& JFactory::getDBO();
+      $db = JFactory::getDBO();
       $query = "SELECT * FROM (SELECT c.id camperid, 0 yearattendingid, f.name familyname, c.firstname, c.lastname, cs.staffpositionid, sp.name staffpositionname, 0 is_eaf_paid FROM muusa_family f, muusa_camper c, muusa_camperid__staff cs, muusa_staffposition sp WHERE f.id=c.familyid AND c.id=cs.camperid AND cs.staffpositionid=sp.id AND sp.programid=$id UNION ALL SELECT c.id, ya.id, f.name, c.firstname, c.lastname, sp.id, sp.name, ysp.is_eaf_paid FROM muusa_family f, muusa_camper c, muusa_yearattending ya, muusa_yearattending__staff ysp, muusa_staffposition sp, muusa_year y WHERE f.id=c.familyid AND c.id=ya.camperid AND ya.year=y.year AND y.is_current=1 AND ya.id=ysp.yearattendingid AND ysp.staffpositionid=sp.id AND sp.programid=$id) s1 ORDER BY familyname, lastname, firstname";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
 
    function deleteCamperStaff($obj) {
-      $db =& JFactory::getDBO();
-      $user =& JFactory::getUser();
+      $db = JFactory::getDBO();
+      $user = JFactory::getUser();
       $query = "DELETE FROM muusa_camperid__staff WHERE camperid=$obj->camperid AND staffpositionid=$obj->staffpositionid";
       $db->setQuery($query);
       $db->query();
@@ -59,8 +59,8 @@ class muusla_databaseModelstaff extends JModel
    }
 
    function deleteYearStaff($obj) {
-      $db =& JFactory::getDBO();
-      $user =& JFactory::getUser();
+      $db = JFactory::getDBO();
+      $user = JFactory::getUser();
       $query = "DELETE FROM muusa_yearattending__staff WHERE yearattendingid=$obj->yearattendingid AND staffpositionid=$obj->staffpositionid";
       $db->setQuery($query);
       $db->query();
@@ -70,8 +70,8 @@ class muusla_databaseModelstaff extends JModel
    }
 
    function upsertStaff($obj) {
-      $db =& JFactory::getDBO();
-      $user =& JFactory::getUser();
+      $db = JFactory::getDBO();
+      $user = JFactory::getUser();
       $query = "SELECT ya.id FROM muusa_yearattending ya, muusa_year y WHERE ya.camperid=$obj->camperid AND ya.year=y.year AND y.is_current=1";
       $db->setQuery($query);
       $yaid = $db->loadResult();
@@ -98,7 +98,7 @@ class muusla_databaseModelstaff extends JModel
    }
 
    function upsertPaid($obj) {
-      $db =& JFactory::getDBO();
+      $db = JFactory::getDBO();
       $query = "UPDATE muusa_yearattending__staff SET is_eaf_paid=" . ($obj->is_eaf_paid=="on" ? 1 : 0) . " WHERE yearattendingid=$obj->yearattendingid AND staffpositionid=$obj->staffpositionid";
       $db->setQuery($query);
       $db->query();
