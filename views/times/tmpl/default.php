@@ -70,6 +70,6 @@
          <tr>
       
       </table>
-      <input type="submit" value="Save" class="Button" />
+      <input type="submit" value="Save" class="btn" />
    </form>
 </div>

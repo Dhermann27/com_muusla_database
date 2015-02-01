@@ -4,7 +4,7 @@
    rel="stylesheet" />
 <script type="text/javascript">
    jQuery(document).ready(function ($) {
-	    $("#muusaApp .save").button().click(function (event) {
+	    $("#muusaApp .save").click(function (event) {
 		    submit($);
 	        event.preventDefault();
 	        return false;
@@ -112,7 +112,7 @@
                               </td>
                               <td>&nbsp;</td>
                               <td>
-                                 <button class="add myhelp">Add Staff</button>
+                                 <button class="add help">Add Staff</button>
                               </td>
                            </tr>
                            <tr>

@@ -4,11 +4,11 @@
    rel="stylesheet" />
 <script type="text/javascript">
    jQuery(document).ready(function ($) {
-	    $("#carryheader").button().click(function (event) {
+	    $("#carryheader").click(function (event) {
 	        $("#carryovers").toggle();
 	        event.preventDefault();
 	    });
-	    $("#save").button().click(function (event) {
+	    $("#save").click(function (event) {
 		    submit($);
 	        event.preventDefault();
 	        return false;
@@ -140,7 +140,7 @@
                                  class="inputtext ui-corner-all" />
                               </td>
                               <td>
-                                 <button class="add myhelp">Add</button>
+                                 <button class="add help">Add</button>
                               </td>
                            </tr>
                            <?php }?>

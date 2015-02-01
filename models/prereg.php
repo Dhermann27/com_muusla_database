@@ -28,7 +28,7 @@ class muusla_databaseModelprereg extends JModelItem
 
    function getChargetypes() {
       $db = JFactory::getDBO();
-      $query = "SELECT id, name FROM muusa_chargetype WHERE id IN (1001, 1016)";
+      $query = "SELECT id, name FROM muusa_chargetype WHERE id IN (1001, 1016, 1022)";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
@@ -49,7 +49,7 @@ class muusla_databaseModelprereg extends JModelItem
 
    function getPrereg() {
       $db = JFactory::getDBO();
-      $query = "SELECT th.id, f.name familyname, c.firstname, c.lastname, th.camperid, th.chargetypeid, ABS(th.amount) amount, DATE_FORMAT(th.timestamp, '%m/%d/%Y') timestamp, th.memo FROM muusa_family f, muusa_camper c, muusa_thisyear_charge th WHERE f.id=c.familyid AND c.id=th.camperid AND th.chargetypeid IN (1001,1016) ORDER BY f.name, c.birthdate";
+      $query = "SELECT th.id, f.name familyname, c.firstname, c.lastname, th.camperid, th.chargetypeid, ABS(th.amount) amount, DATE_FORMAT(th.timestamp, '%m/%d/%Y') timestamp, th.memo FROM muusa_family f, muusa_camper c, muusa_thisyear_charge th WHERE f.id=c.familyid AND c.id=th.camperid AND th.chargetypeid IN (1001,1016,1022) ORDER BY f.name, c.birthdate";
       $db->setQuery($query);
       return $db->loadObjectList();
    }

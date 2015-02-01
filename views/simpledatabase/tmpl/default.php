@@ -26,7 +26,7 @@
       echo "      </tr>\n";
    }
    echo "</table>\n";
-   echo "<input type='submit' value='Save' class='Button' />\n";
+   echo "<input type='submit' value='Save' class='btn' />\n";
    echo "</form>\n";
    ?>
 </div>
